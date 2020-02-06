@@ -87,16 +87,6 @@ header {
     text-align: center;
     cursor: pointer;
 }
-.btn:active,
-.btn:visited,
-.btn:focus {
-    background-color: hsl(360, 91%, 36%);
-    outline: none;
-    box-shadow: none;
-}
-.btn:hover {
-    background-color: rgb(252, 0, 0);
-}
 
 button[disabled] {
     cursor: default;
