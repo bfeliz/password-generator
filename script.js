@@ -1,34 +1,40 @@
 // Assignment Code
 var generateBtn = document.querySelector('#generate');
-
+var selectedList;
 // user data
-var userInput = [];
+// array that will store the value of selected length and checkboxes
+var userSelections = [];
 
-function writePassword() {
-    // user input
-    for (let i = 0; i < 1; i++) {
-        var userLength = prompt('Pick a number between 8 and 128');
-        userInput.push(userLength);
-        if (userLength < 8 || userLength > 128) {
-            alert(
-                'That is not a valid choice, please refresh page to try again'
-            );
-            i--;
-            return;
-        }
+function getSelectedLength() {
+    var selectedLength = document.getElementById('lengthCheck');
+    var selectedValue =
+        selectedLength.options[selectedLength.selectedIndex].value;
 
-        var userLowercase = confirm('Do you want to use lowercase letters?');
-        userInput.push(userLowercase);
+    userSelections.push(selectedValue);
+    return userSelections;
+}
 
-        var userUppercase = confirm('Do you want to use uppercase letters?');
-        userInput.push(userUppercase);
+document.getElementById('submitLengthBtn').onclick = function() {
+    var selectedList = getSelectedLength(this.form);
+};
 
-        var userNumbers = confirm('Do you want to use numbers?');
-        userInput.push(userNumbers);
+function getSelectedChbox(from) {
+    var checkboxItems = from.getElementsByTagName('input');
+    var reviewCheckbox = checkboxItems.length;
 
-        var userSpecial = confirm('Do you want to use special characters?');
-        userInput.push(userSpecial);
+    for (var i = 0; i < reviewCheckbox; i++) {
+        if (
+            checkboxItems[i].type == 'checkbox' &&
+            checkboxItems[i].checked == true
+        )
+            userSelections.push(checkboxItems[i].value);
     }
+
+    return userSelections;
+}
+
+document.getElementById('submitBtn').onclick = function() {
+    var selectedList = getSelectedChbox(this.form);
 
     // create password
     var passwordArray = [];
@@ -37,16 +43,16 @@ function writePassword() {
     var numbers = '1234567890';
     var special = '!@#$%^&*()';
 
-    if (userLowercase) {
+    if (selectedList.includes('lowercase')) {
         passwordArray.push(lowercase);
     }
-    if (userUppercase) {
+    if (selectedList.includes('uppercase')) {
         passwordArray.push(uppercase);
     }
-    if (userNumbers) {
+    if (selectedList.includes('numbers')) {
         passwordArray.push(numbers);
     }
-    if (userSpecial) {
+    if (selectedList.includes('special')) {
         passwordArray.push(special);
     }
 
@@ -63,17 +69,7 @@ function writePassword() {
         }
         return result;
     }
-
-    console.log(generatePassword(userInput[0]));
-    var password = generatePassword(userInput[0]);
+    var password = generatePassword(userSelections[0]);
     var passwordText = document.querySelector('#password');
     passwordText.value = password;
-}
-
-// if (generateBtn.addEventListener('click')) {
-//     function reloadPage() {
-//         location.reload();
-// }
-// }
-// Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
+};
