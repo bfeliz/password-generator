@@ -67,7 +67,11 @@ document.getElementById('submitBtn').onclick = function() {
                 Math.floor(Math.random() * characterLength)
             );
         }
-        return result;
+        if (result === '') {
+            return 'You did not give sufficient parameters. You either forgot to click the Select Length button, or you did not select any character types. Please refresh the page and try again.';
+        } else {
+            return result;
+        }
     }
     var password = generatePassword(userSelections[0]);
     var passwordText = document.querySelector('#password');

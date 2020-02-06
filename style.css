@@ -92,6 +92,7 @@ header {
 #submitBtn {
     padding: 7px 17px;
     font-size: 16px;
+    margin-left: 0;
 }
 
 button[disabled] {
