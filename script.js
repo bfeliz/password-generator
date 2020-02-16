@@ -6,37 +6,9 @@ var selectedList;
 // array that will store the value of selected length and checkboxes
 var userSelections = [];
 
-// function to get the users selected length and add to array
-function getSelectedLength() {
-    var selectedLength = document.getElementById('lengthCheck');
-    var selectedValue =
-        selectedLength.options[selectedLength.selectedIndex].value;
-
-    userSelections.push(selectedValue);
-    return userSelections;
-}
-
-document.getElementById('submitLengthBtn').onclick = function() {
-    getSelectedLength(this.form);
-};
-
-// function to get the users selected parameters from the checkboxes
-function getSelectedChbox(from) {
-    var checkboxItems = from.getElementsByTagName('input');
-    var reviewCheckbox = checkboxItems.length;
-
-    for (var i = 0; i < reviewCheckbox; i++) {
-        if (
-            checkboxItems[i].type == 'checkbox' &&
-            checkboxItems[i].checked == true
-        )
-            userSelections.push(checkboxItems[i].value);
-    }
-    return userSelections;
-}
-
 // start processing user data and generate password on 'Show my password' button click
 document.getElementById('submitBtn').onclick = function() {
+    getSelectedLength();
     var selectedList = getSelectedChbox(this.form);
 
     // create password array using user parameters
@@ -74,12 +46,44 @@ document.getElementById('submitBtn').onclick = function() {
 
         // output to user display with further instructions or generated password
         if (result === '') {
-            return 'You did not give sufficient parameters. You either forgot to click the Select Length button, or you did not select any character types. Please refresh the page and try again.';
+            return 'You did not give sufficient parameters. You must select at least one character type. Please try again.';
         } else {
-            return result + '\n \n Refresh screen to start again';
+            return result;
         }
     }
     var password = generatePassword(userSelections[0]);
     var passwordText = document.querySelector('#password');
     passwordText.value = password;
+
+    reset();
 };
+
+// function to get the users selected length and add to array
+function getSelectedLength() {
+    var selectedLength = document.getElementById('lengthCheck');
+    var selectedValue =
+        selectedLength.options[selectedLength.selectedIndex].value;
+
+    userSelections.push(selectedValue);
+    return userSelections;
+}
+
+// function to get the users selected parameters from the checkboxes
+function getSelectedChbox(from) {
+    var checkboxItems = from.getElementsByTagName('input');
+    var reviewCheckbox = checkboxItems.length;
+
+    for (var i = 0; i < reviewCheckbox; i++) {
+        if (
+            checkboxItems[i].type == 'checkbox' &&
+            checkboxItems[i].checked == true
+        )
+            userSelections.push(checkboxItems[i].value);
+    }
+    return userSelections;
+}
+// reset the arrays
+function reset() {
+    userSelections = [];
+    passwordArray = [];
+}
