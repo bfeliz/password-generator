@@ -2,16 +2,24 @@
 
 ## Description
 
-Third Homework Assignment - A password generator that takes user imput about password length and character types into account to create the needed password.
+A password generator that takes user imput about password length and character types into account to create the needed password.
 
-## Link to github repository:
+## [Try it yourself!](https://bfeliz.github.io/password-generator/)
 
-https://github.com/bfeliz/password-generator
+## Getting Started
 
-## Link to deployed app:
+This is a simple application that runs right in the browser, no installation or downloads needed.
 
-https://bfeliz.github.io/password-generator/
+## Built With:
+
+JavaScript - programming language <br>
+Bootstrap - CSS Framework <br>
 
 ## Author:
 
-Brittany Fortner
+Brittany Fortner <br>
+See commit history [here](https://github.com/bfeliz/password-generator/graphs/contributors).
+
+## Planned Updates
+
+There are no plans to further update this application at this time.
